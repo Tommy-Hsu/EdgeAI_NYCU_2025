@@ -1,0 +1,18 @@
+services:
+  edgeai:
+    container_name: edgeai
+    image: edgeai
+    build: .
+    volumes:
+      - .:/home/edgeai
+      - /dev/shm:/dev/shm
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+    stdin_open: true
+    tty: true
+    ipc: host
